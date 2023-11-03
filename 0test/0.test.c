@@ -7,7 +7,7 @@ int main(int argc, char const *argv[])
 {
     char *string = "IV";
 
-    printf("%d", romanToInt(string));
+    printf("%d", 3/2);
     
     return 0;
 }
