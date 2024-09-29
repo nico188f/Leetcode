@@ -1,35 +1,47 @@
+package javaTestCases;
+
 import java.util.ArrayList;
 
-public class Main {
+public class TestCases<CaseType, ResultType> {
    static final String ANSI_RESET = "\u001B[0m";
    static final String ANSI_RED = "\u001B[31m";
    static final String ANSI_GREEN = "\u001B[32m";
    static final String ANSI_RED_BACKGROUND = "\u001B[41m";
    static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
+   
+   ArrayList<Tuple<CaseType, ResultType>> tests;
+   SolutionToProblem<CaseType, ResultType> solution;
+   public TestCases(SolutionToProblem<CaseType, ResultType> solution) {
+      tests = new ArrayList<>();
+      this.solution = solution;
+   }
 
-   public static void main(String[] args) {
-      ArrayList<Tuple<String, String>> testCases = new ArrayList<Tuple<String, String>>();
+   public void add(CaseType testCase, ResultType testSolution) {
+      tests.add(new Tuple<>(testCase, testSolution));
+   }
 
-      testCases.add(new Tuple<String,String>("oohovoujkbnsaipnsk", "oho"));
-      testCases.add(new Tuple<String,String>("sndoab", "s"));
-      testCases.add(new Tuple<String,String>("nsdcinanijnjeb", "inani"));
-      testCases.add(new Tuple<String,String>("koao", "oao"));
+   boolean runTestCase(Tuple<CaseType, ResultType> test) {
+      return solution.solution(test.x).equals(test.y);
+   }
 
-      int numOfTestCases = testCases.size();
+   public void runTestCases() {
+      int numOfTestCases = tests.size();
       int correctAnswers = 0;
-      Solution solution = new Solution();
-      for (Tuple<String, String> testCase : testCases) {
-         String result = solution.longestPalindrome(testCase.x);
-         if (result.equals(testCase.y)) {
-            System.out.println(ANSI_GREEN_BACKGROUND + " CORRECT " + ANSI_RESET + "  " + testCase.x + ": " + ANSI_GREEN + result);
+
+      for (Tuple<CaseType, ResultType> test : tests) {
+         ResultType result = solution.solution(test.x);
+
+         if (result.equals(test.y)) {
+            System.out.println(ANSI_GREEN_BACKGROUND + " PASSED " + ANSI_RESET + "  " + test.x + ": " + ANSI_GREEN + result);
             correctAnswers++;
          }
          else {
-            System.out.println(ANSI_RED_BACKGROUND + "  WRONG  " + ANSI_RESET + "  " + testCase.x + ": " + ANSI_RED + result);
-            System.out.println(ANSI_RED_BACKGROUND + "         " + ANSI_RESET + "  Correct answer: " + ANSI_GREEN + testCase.y);
+            System.out.println(ANSI_RED_BACKGROUND + " FAILED " + ANSI_RESET + "  " + test.x + ": " + ANSI_RED + result);
+            System.out.println(ANSI_RED_BACKGROUND + "        " + ANSI_RESET + "  Correct answer: " + ANSI_GREEN + test.y);
          }
       }
       System.out.println();
+      
       if (correctAnswers == numOfTestCases) {
          System.out.println(ANSI_GREEN_BACKGROUND + "ALL TEST CASES PASSED!" + ANSI_RESET);
       }
@@ -37,7 +49,8 @@ public class Main {
          System.out.println(ANSI_RED_BACKGROUND + "SOLUTION WRONG " + correctAnswers + "/" + numOfTestCases + " PASSED:" + ANSI_RESET);
          System.out.println();
 
-         int progressBarSize = 10;
+         //progress bar
+         int progressBarSize = 20;
          String progressBar;
          if (correctAnswers == 0) {
             progressBar = ANSI_RED_BACKGROUND;

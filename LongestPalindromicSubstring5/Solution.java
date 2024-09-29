@@ -1,7 +1,11 @@
-//https://leetcode.com/problems/longest-palindromic-substring/description/
+package LongestPalindromicSubstring5;
 
-class Solution {
-    public String longestPalindrome(String s) {
+
+
+import javaTestCases.SolutionToProblem;
+
+public class Solution implements SolutionToProblem<String, String>{
+    public String solution(String s) {
         String longestSubString = "";
         for (int i = 0; i < s.length(); i++) {
             String currSubString = String.valueOf(s.charAt(i));
