@@ -52,7 +52,7 @@ public class TestCases<CaseType, ResultType> {
          //progress bar
          int progressBarSize = 20;
          String progressBar;
-         String border = "";
+         String border = "══"; //! NOT A EQUALS SIGN
          if (correctAnswers == 0) {
             progressBar = ANSI_RED_BACKGROUND;
             for (int i = 0; i < progressBarSize; i++) {
@@ -74,7 +74,7 @@ public class TestCases<CaseType, ResultType> {
             }
          }
          System.out.println("╔" + border + "╗");
-         System.out.println("║" + progressBar + ANSI_RESET + "║");
+         System.out.println("║ " + progressBar + ANSI_RESET + " ║");
          System.out.println("╚" + border + "╝");
       }
    }
