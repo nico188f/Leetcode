@@ -52,10 +52,12 @@ public class TestCases<CaseType, ResultType> {
          //progress bar
          int progressBarSize = 20;
          String progressBar;
+         String border = "";
          if (correctAnswers == 0) {
             progressBar = ANSI_RED_BACKGROUND;
             for (int i = 0; i < progressBarSize; i++) {
-               progressBar += "#";
+               progressBar += " ";
+               border += "═"; //! NOT A EQUALS SIGN
             }
          }
          else {
@@ -63,14 +65,17 @@ public class TestCases<CaseType, ResultType> {
             int numOfGreenSquares = ((int) Math.ceil((double)progressBarSize / numOfTestCases)) * correctAnswers - 1;
             for (int i = 0; i < progressBarSize; i++) {
                if (numOfGreenSquares == i) {
-                  progressBar += ANSI_RED_BACKGROUND + "#";
+                  progressBar += ANSI_RED_BACKGROUND + " ";
                }
                else {
-                  progressBar += "#";
+                  progressBar += " ";
                }
+               border += "═"; //! NOT A EQUALS SIGN
             }
          }
-         System.out.println("[ " + progressBar + ANSI_RESET + " ]");
+         System.out.println("╔" + border + "╗");
+         System.out.println("║" + progressBar + ANSI_RESET + "║");
+         System.out.println("╚" + border + "╝");
       }
    }
 }
