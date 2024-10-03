@@ -50,7 +50,7 @@ public class TestCases<CaseType, ResultType> {
          System.out.println();
 
          //progress bar
-         int progressBarSize = 20;
+         int progressBarSize = 30;
          String progressBar;
          String border = "══"; //! NOT A EQUALS SIGN
          if (correctAnswers == 0) {
